@@ -1,18 +1,27 @@
-import React from 'react'
+import React,{useState} from 'react'
 import GoogleLogin from "react-google-login"
 function App() {
-  function responseGoogle(){
+  const [name,setname]=useState("")
+  const [photo,setphoto]=useState()
+
+  function responseGoogle(response){
+  setname(response.profileObj.name)
+  setphoto(response.profileObj.imageUrl)
+  console.log(response.profileObj)
+
 
   }
   return (
     <div>
       <GoogleLogin
-      clientId=""
+      clientId="54479578786-0g39h4bugcjtp7i8i63j5uf3bjrds6bt.apps.googleusercontent.com"
       buttonText="Login"
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
       cookiePolicy={"single_host_origin"}
       />
+      <h1>{name}</h1>
+      <img src={photo}></img>
     </div>
   )
 }
